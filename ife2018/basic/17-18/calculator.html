@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <script>
+        var result = document.getElementById("result");
+        
+        // 加
+        document.getElementById("add-btn").addEventListener('click', function() {
+            var firstN = parseFloat(document.getElementById("first-number").value);
+            var secondN = parseFloat(document.getElementById("second-number").value);
+            result.innerHTML = firstN + secondN;
+        })
+        
+        // 减
+        document.getElementById("minus-btn").addEventListener('click', function() {
+            var firstN = parseFloat(document.getElementById("first-number").value);
+            var secondN = parseFloat(document.getElementById("second-number").value);
+            result.innerHTML = firstN - secondN;
+        })
+        
+        // 乘
+        document.getElementById("times-btn").addEventListener('click', function() {
+            var firstN = parseFloat(document.getElementById("first-number").value);
+            var secondN = parseFloat(document.getElementById("second-number").value);
+            result.innerHTML = firstN * secondN;
+        })
+        
+        // 除
+        document.getElementById("divide-btn").addEventListener('click', function() {
+            var firstN = parseFloat(document.getElementById("first-number").value);
+            var secondN = parseFloat(document.getElementById("second-number").value);
+            
+            if(secondN == 0) {
+                alert("除数不能为0！")
+                result.innerHTML = "";
+            } else {
+                result.innerHTML = firstN / secondN;
+            }
+        })
+    </script>
+</body>
+</html>
