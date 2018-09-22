@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loop</title>
+</head>
+
+<body>
+    <p>3的小游戏：<input id="game-3" type="button" value="开始"></p>
+    <p>九九乘法表  <input id="game-9" type="button" value="生成">
+</p>
+    <div id="multiplication"></div>
+    
+    <script>
+        document.getElementById("game-3").addEventListener("click", function() {
+            var str = "";
+            for(var i = 0; i < 100; i ++) {
+                if(i % 3 == 0 || i.toString().includes('3')) {
+                    str = str + "PA, "
+                } else {
+                    str = str + i.toString() + ", ";
+                }
+            }
+            console.log(str);
+        });
+        
+        document.getElementById("game-9").addEventListener('click', function() {
+            var mtable = document.getElementById("multiplication");
+            
+            for(var i = 1; i < 10; i ++) {
+                var mp = document.createElement('p');
+                var text = "";
+                for (var j = 1; j <= i; j ++) {
+                    text = text + i.toString() + "*" + j.toString() + "=" + (i * j).toString() + "\t"; 
+                }
+                var mtext = document.createTextNode(text);
+                mp.append(mtext);
+                mtable.append(mp);
+            }
+        });
+    </script>
+</body>
+</html>
