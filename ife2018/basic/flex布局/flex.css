@@ -1,0 +1,67 @@
+body, header, section, article, div, p {
+    padding: 0;
+    margin: 0;
+}
+
+.he {
+    width: 100%;
+    height: 200px;
+    background-color: antiquewhite;
+}
+.se {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+.ar {
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px;
+    width: 400px;
+/*    height: 300px;*/
+    border: 1px solid black;
+}
+
+/* 粘性定位 */
+.sk {
+    position: sticky;
+    top: 0;
+    margin-top: 10px;
+    height: 100px;
+    background-color:darkgray;
+}
+
+/* 浮动布局 */
+.fse {
+    height: 300px;
+    background-color:blue;
+    clear: both;
+}
+.far {
+    margin: 10px;
+    float: left;
+    width: 200px;
+    background-color:aqua;
+}
+/* 闭合浮动 */
+.fc {
+    /* 1.将父元素的overflow设置为hidden */
+/*    overflow: hidden;*/
+    background-color: cadetblue;
+}
+
+/* 2. 在父元素的最后设置一个空的div,clear: both; */
+
+/* 3. */
+.clearfloat {
+    zoom: 1;
+}
+.clearfloat:after {
+    height: 0;
+    content: "";
+    clear: both;
+    visibility: hidden;
+}
