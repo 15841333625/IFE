@@ -46,16 +46,10 @@
 
     function findAllHtmlSpanInOneSection(sectionId) {
         // 返回某个section下所有span中内容为HTML的span标签
-        var sec = document.getElementById(sectionId);
-        var spans = sec.getElementsByTagName('span');
+//        var sec = document.getElementById(sectionId);
+//        var spans = sec.getElementsByTagName('span');
         
-//        var spans = document.querySelectorAll('#' + sectionId + ' span');
-
-        for(var i = 0; i < spans.length; i ++) {
-            spans.onclick = function () {
-                console.log('lalala');
-            };
-        }
+        var spans = document.querySelectorAll('#' + sectionId + ' span');
         
         var re = [];
       
