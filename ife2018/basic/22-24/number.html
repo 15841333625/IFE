@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ife js 数据结构</title>
+    <title>ife js number</title>
 </head>
 
 <body>
@@ -24,9 +24,6 @@
     <p id="result"></p>
     
     <script>
-        var sa = document.getElementById("num-a").value;
-        var sb = document.getElementById("num-b").value;
-        
         function show(divName, text) {
             var result = document.getElementById(divName);
             result.innerText = text;
@@ -59,6 +56,9 @@
         });
         // 把 A 四舍五入为 B 个小数位数的数字
         document.getElementById("changeToFloat").addEventListener('click', function() {
+            var sa = document.getElementById("num-a").value;
+            var sb = document.getElementById("num-b").value;
+            
             if(isNumber(sa) && isNumber(sb)) {
                 // 获得b的位数
                 var b_bits = sb.split('.')[1].length;
@@ -106,6 +106,9 @@
         });
         // 返回 A 和 B 中的最高值
         document.getElementById("max").addEventListener('click', function() {
+            var sa = document.getElementById("num-a").value;
+            var sb = document.getElementById("num-b").value;
+            
             if(isNumber(sa) && isNumber(sb)) {
                 var na = parseFloat(sa);
                 var nb = parseFloat(sb);
@@ -116,6 +119,9 @@
         });
         // 返回 A 和 B 中的最低值
         document.getElementById("min").addEventListener('click', function() {
+            var sa = document.getElementById("num-a").value;
+            var sb = document.getElementById("num-b").value;
+            
             if(isNumber(sa) && isNumber(sb)) {
                 var na = parseFloat(sa);
                 var nb = parseFloat(sb);
