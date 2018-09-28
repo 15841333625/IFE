@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ife js sort</title>
+</head>
+
+<body>
+    <script>
+        var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+        var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+        var arr3 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+        var arr4 = [
+                        {
+                            id: 1,
+                            name: 'candy',
+                            value: 40
+                        }, {
+                            id: 2,
+                            name: 'Simon',
+                            value: 50
+                        }, {
+                            id: 3,
+                            name: 'Tony',
+                            value: 45
+                        }, {
+                            id: 4,
+                            name: 'Annie',
+                            value: 60
+                        }
+                    ];
+        // 从大到小
+        function comFun1(a, b) {
+            if(a > b) return -1;
+            else if(a === b) return 0;
+            else return 1;
+        }
+        // 从小到大
+        function comFun2(a, b) {
+            if(a > b) return 1;
+            else if(a === b) return 0;
+            else return -1;
+        }
+        // 第二个元素从大到小
+        function comFun3(a, b) {
+            return comFun1(a[1], b[1]);
+        }
+        // 按照value值从小到大 
+        function comFun4(a, b) {
+            return comFun2(a.value, b.value);
+        }
+        console.log("降序：" + arr1.sort(comFun1));
+        console.log("升序：" + arr1.sort(comFun2));
+        console.log("降序：" + arr2.sort(comFun1));
+        console.log("升序：" + arr2.sort(comFun2));
+        console.log(arr3.sort(comFun3));
+        console.log(arr4.sort(comFun4));
+        
+        // 对象转为数组
+        var scoreObject = {
+            "Tony": {
+                "Math": 95,
+                "English": 79,
+                "Music": 68
+            }, 
+            "Simon": {
+                "Math": 100,
+                "English": 95,
+                "Music": 98
+            }, 
+            "Annie": {
+                "Math": 54,
+                "English": 65,
+                "Music": 88
+            }
+        }
+        
+        function ObjToArr(o) {
+            var arr = [], arr2;
+            for(e in o) {
+                arr2 = [];
+                arr2.push(e);
+                
+                for(ee in o[e]) {
+                    
+                    arr2.push(o[e][ee]);
+                    
+                }
+                arr.push(arr2);
+            }
+            return arr;
+        }
+        console.log(ObjToArr(scoreObject));
+        
+        // 数组转为对象
+        // 多级菜单数组
+        var menuArr = [
+            [1, "Area1", -1],
+            [2, "Area2", -1],
+            [3, "Area1-1", 1],
+            [4, "Area1-2", 1],
+            [5, "Area2-1", 2],
+            [6, "Area2-2", 2],
+            [7, "Area1-2-3", 4],
+            [8, "Area2-2-1", 6],
+        ];
+        
+        function ArrToObj(arr) {
+            var obj = {};
+            var temp;
+            var key;
+            var parentName = {};
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i][2] == -1) {
+                    obj[arr[i][0]] = {};
+                    obj[arr[i][0]].name = arr[i][1];
+                    parentName[arr[i][1]] = arr[i][0];
+                } else if (arr[i][1].split('-').length == 2) {
+                    temp = arr[i][1].split('-')[0];
+                    key = parentName[temp];
+                    if (!key) {
+                        console.error('error');
+                        return false;
+                    } else {
+                        if (!obj[key].subMenu) {
+                            obj[key].subMenu = {};
+                        }
+                        obj[key].subMenu[arr[i][0]] = {
+                            name: arr[i][1],
+                        }
+                    }
+                    parentName[arr[i][1]] = arr[i][0];
+                } else if (arr[i][1].split('-').length == 3) {
+                    temp = arr[i][1].split('-')[0] + '-' + arr[i][1].split('-')[1];
+                    key = parentName[temp];
+                    if (!key) {
+                        console.error('error');
+                        return false;
+                    } else {
+                        if (!obj[parentName[arr[i][1].split('-')[0]]].subMenu[key].subMenu) {
+                            obj[parentName[arr[i][1].split('-')[0]]].subMenu[key].subMenu = {};
+                        }
+                        obj[parentName[arr[i][1].split('-')[0]]].subMenu[key].subMenu[arr[i][0]] = {
+                            name: arr[i][1],
+                        }
+                    }
+                }
+            }
+            return obj;
+        }
+        
+        console.log(ArrToObj(menuArr));
+    </script>
+</body>
+</html>
