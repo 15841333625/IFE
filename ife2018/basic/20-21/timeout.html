@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ife timeout interval</title>
+    <style>
+        #smile {
+            width: 480px;
+            height: 480px;
+            background: url('http://ife.baidu.com/2016/static/img/erik_ce204002.jpg') no-repeat;
+            background-position: 0px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+    <button id="fade-btn">淡出</button><br/>
+    <div id="smile"></div>
+    <button id="smile-btn">开始</button><br/>
+    
+    <script>
+        // 淡入 淡出
+        var fade = document.getElementById("fade-btn");
+        fade.addEventListener('click', function() {
+            var btntext = fade.innerText;
+            
+            if(btntext == "淡出") {
+                fade.disabled = true;
+                fade_out();
+            } else if(btntext == "淡入") {
+                fade.disabled = true;
+                fade_in();
+            }
+        })
+        
+        function fade_out() {
+            var e = document.getElementById("fade-obj");
+            
+            e.style.opacity = '1';
+            
+            var timer = window.setInterval(function() {
+                var opa = parseFloat(e.style.opacity);
+                
+                if(opa > 0) {
+                    
+                    opa = opa - 0.05;
+                    e.style.opacity = opa.toString();
+                    
+                } else {
+                    
+                    fade.disabled = false;
+                    fade.innerText = "淡入";
+                    window.clearInterval(timer);
+                    
+                }
+                
+            }, 100);
+            
+        }
+        
+        function fade_in() {
+            var e = document.getElementById("fade-obj");
+            
+            e.style.opacity = '0';
+            
+            var timer = window.setInterval(function() {
+                var opa = parseFloat(e.style.opacity);
+                
+                if(opa < 1) {
+                    
+                    opa = opa + 0.05;
+                    e.style.opacity = opa.toString();
+                    
+                } else {
+                    
+                    e.style.opacity = "1";
+                    
+                    fade.disabled = false;
+                    fade.innerText = "淡出";
+                    
+                    window.clearInterval(timer);
+                    
+                }
+                
+            }, 100);
+            
+        }
+        
+        // css sprite 处理背景图片
+        document.getElementById("smile-btn").addEventListener('click', function() {
+            var pic = document.getElementById("smile");
+            var icount = 0;
+            
+            var interv = setInterval(function() {
+                if(icount < 17) {
+                    var offsettop = - (icount * 480);
+                    // 改变背景图片的定位
+                    pic.style.backgroundPosition = "0px " + offsettop + "px";
+                    icount ++;
+                } else {
+                    icount = 0;
+                    pic.style.backgroundPosition = "0px 0px";
+                }
+            }, 100);
+        })
+        
+    </script>
+</body>
+</html>
