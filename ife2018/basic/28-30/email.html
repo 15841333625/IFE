@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ife js email</title>
+    <style>
+        #email-sug-wrapper {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            visibility: hidden;
+        }
+        #email-sug-wrapper li {
+            list-style: none;
+            margin-top: 5px;
+            margin-left: 0;
+            padding-left: 0.5em;
+            height: 1.8em;
+            line-height: 1.8em;
+        }
+        #email-sug-wrapper li:hover {
+            background-color: #dfe2fe;
+        }
+        .selected {
+            background-color: #dfe2fe;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text">
+        <ul id="email-sug-wrapper" class="email-sug"></ul>
+    </div>
+    
+    <script>
+        // 邮箱后缀List参考
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        var inputDom = document.getElementById("email-input");
+        
+        window.onload = inputDom.focus();
+        
+        inputDom.oninput = function() {
+            // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+            joinWrap();
+
+            // 控制email-sug-wrapper的显示/隐藏状态
+            showWrap();
+        }
+        
+        inputDom.onkeyup = function(event) {
+            var sel = document.querySelector(".selected");
+            
+            // 如果按上键
+            if(event.keyCode === 38) {
+                sel.className = "";
+                
+                // 如果找到的Li不是第一个
+                if(sel.parentNode.firstChild !== sel) {
+                    // 设置第一个Li为选中状态
+                    sel.previousElementSibling.className = "selected";
+                } else {
+                    // 将最后一个Li设为选中
+                    sel.parentNode.lastChild.className = "selected";
+                }
+            }
+            
+            // 如果按下键
+            if(event.keyCode === 40) {
+                sel.className = "";
+                
+                // 如果找到的Li不是最后一个
+                if(sel.parentNode.lastChild !== sel) {
+                    // 将它的下一个Li设为选中
+                    sel.nextElementSibling.className = "selected";
+                } else {
+                    // 将第一个Li设为选中
+                    sel.parentNode.firstChild.className = "selected";
+                }
+            }
+            
+            // 如果按的是回车
+            if(event.keyCode === 13) {
+                var text = sel.innerHTML;
+                inputDom.value = text;
+                hideTip();
+            }
+            
+            // 如果按的是Esc
+            if(event.keyCode === 27) {
+                inputDom.select();
+            }
+        }
+        
+        // 重置选中状态
+        function resetSel() {
+            // 找到当前为选中状态的Li
+            var sel = document.querySelector(".selected");
+            // 如果当前选中状态Li不是第一个
+            if(sel === null || sel.parentNode.firstChild !== sel) {
+                // 设置第一个Li为选中状态
+                document.getElementById("email-sug-wrapper").firstChild.className = "selected";
+            }
+        }
+
+        // 获取用户输入
+        function getInput() {
+            
+            // 拿到input输入框的输入内容trim后返回 
+            return document.getElementById("email-input").value.trim();
+        }
+
+        // 生成提示框中的提示内容
+        function getTips() {
+            // 获取用户输入
+            var inp = getInput();
+            var content = "";
+            var mailN = "";
+            var tips = [];
+            
+            // 如果用户输入含有@
+            if(inp.search("@") !== -1) {
+                var pice = inp.split("@");
+        
+                // 用来拼接的用户输入内容 = @之前的字符串
+                inp = pice[0];
+                
+                // 用来前缀匹配的用户输入内容 = @之后的字符串
+                mailN = pice[1];
+            }
+            
+            // 遍历postfixList 
+            for(var i = 0; i < postfixList.length; i ++) {
+                
+                // 如果用来前缀匹配的用户输入内容前缀匹配遍历字符串元素
+                if(postfixList[i].indexOf(mailN) === 0) {
+                    
+                    // 把用户输入和每一个postfix进行结合成为每一个Li
+                    content = inp + "@" + postfixList[i];
+                    var text = document.createTextNode(content);
+                    var tip = document.createElement("li");
+                    tip.append(text);
+                    tips.push(tip);
+                }
+            }
+            
+            if(tips.length === 0) {
+                // 遍历postfixList 
+                for(var i = 0; i < postfixList.length; i ++) {
+
+                    // 把用户输入和每一个postfix进行结合成为每一个Li
+                    content = inp + "@" + postfixList[i];
+                    var text = document.createTextNode(content);
+                    var tip = document.createElement("li");
+                    tip.append(text);
+                    tips.push(tip);
+                }
+            }
+            
+            // 返回生成的提示内容
+            return tips;
+        }
+
+        // 将提示内容添加到email-sug-wrapper中
+        function joinWrap() {
+            var esw = document.getElementById("email-sug-wrapper");
+            esw.innerHTML = "";
+            
+            // 获取生成提示框中的提示内容
+            var tips = getTips();
+            
+            // 将内容添加到email-sug-wrapper中
+            for(var i = 0; i < tips.length; i ++) {
+                esw.append(tips[i]);
+            }
+        }
+
+        // 控制email-sug-wrapper的显示/隐藏状态
+        function showWrap() {
+            if (getInput() === "") {
+                // 隐藏提示框
+                hideTip();
+            } else {
+                // 显示提示框
+                showTip()
+            }
+        }
+
+        // 隐藏提示框
+        function hideTip() {
+            // 做具体隐藏提示框的操作
+            document.getElementById("email-sug-wrapper").style.visibility = "hidden";
+        }
+
+        // 显示提示框
+        function showTip() {
+            // 做具体显示提示框的操作
+            document.getElementById("email-sug-wrapper").style.visibility = "visible";
+            resetSel();
+        }
+        
+        // 选择一个合适的DOM节点.监听鼠标点击，选择父结点事件委托
+        document.querySelector("#email-sug-wrapper").addEventListener('click', function(event) {
+            var o = event.target;
+            var val = o.innerHTML;
+            
+            if(o.nodeName.toLowerCase() == "li") {
+                document.getElementById("email-input").value = val;
+                hideTip();
+                inputDom.focus();
+            }
+        });
+    </script>
+</body>
+</html>
