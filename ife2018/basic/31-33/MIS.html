@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ife js MIS</title>
+    <style>
+        table {
+            margin-top: 10px;
+            border-collapse: collapse; 
+        }
+        table, td, th { 
+            border: solid 1px #000; 
+        } 
+        td {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="hd"><input id="hd" type="radio" value="华东" name="location">华东</label>
+    <label for="hb"><input id="hb" type="radio" value="华北" name="location">华北</label>
+    <label for="hn"><input id="hn" type="radio" value="华南" name="location">华南</label>
+    
+    <label for="sj"><input id="sj" type="radio" value="手机" name="product">手机</label>
+    <label for="bjb"><input id="bjb" type="radio" value="笔记本" name="product">笔记本</label>
+    <label for="znyx"><input id="znyx" type="radio" value="智能音箱" name="product">智能音箱</label>
+    
+    <div id="region-radio-wrapper">地区：</div>
+    <div id="product-radio-wrapper">产品：</div>
+   
+    <div id="table-wrapper">
+    </div>
+    
+    <script src="./js/checkBox.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/sourceData.js"></script>
+    <script src="./js/selectOne.js"></script>
+    <script src="./js/selectSome.js"></script>
+</body>
+</html>
