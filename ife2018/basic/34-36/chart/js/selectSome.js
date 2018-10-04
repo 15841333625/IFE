@@ -143,6 +143,15 @@
         // tr添加监听事件，渲染图表
         var trs = document.getElementsByTagName('tr');
         
+        table.addEventListener('mouseout', function() {
+            var data = [];
+            
+            for(var i = 0; i < list.length; i ++) {
+                data.push(list[i].sale);
+            }
+            renderLineCharts(data);
+        })
+        
         for(var i = 0; i < trs.length; i ++) {
             
             trs[i].addEventListener('mouseover', function() {
@@ -158,6 +167,8 @@
                 }
                 
                 renderBarChart(data);
+                renderLineChart(data);
+                
             });
         }
     }
