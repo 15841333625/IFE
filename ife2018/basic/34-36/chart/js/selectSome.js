@@ -139,37 +139,5 @@
         }
         
         table.append(tbd);
-        
-        // tr添加监听事件，渲染图表
-        var trs = document.getElementsByTagName('tr');
-        
-        table.addEventListener('mouseout', function() {
-            var data = [];
-            
-            for(var i = 0; i < list.length; i ++) {
-                data.push(list[i].sale);
-            }
-            renderLineCharts(data);
-        })
-        
-        for(var i = 0; i < trs.length; i ++) {
-            
-            trs[i].addEventListener('mouseover', function() {
-                var data = [];
-                
-                var tds = this.getElementsByTagName('td');
-                for(var j = 0; j < tds.length; j ++) {
-                    
-                    var d = parseFloat(tds[j].innerText);
-                    
-                    if(isNaN(d) === false)
-                        data.push(d);
-                }
-                
-                renderBarChart(data);
-                renderLineChart(data);
-                
-            });
-        }
     }
 })();
