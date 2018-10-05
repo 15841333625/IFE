@@ -1,3 +1,4 @@
+// 复选框组件
 function CheckBox(container, name, values) {
     // 生成全选框
     this.all_check = document.createElement("input");
