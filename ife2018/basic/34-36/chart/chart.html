@@ -6,7 +6,7 @@
     <title>ife js chart</title>
     <style>
         #table-wrapper {
-            height: 350px;
+            height: 420px;
         }
         table {
             margin-top: 10px;
@@ -15,11 +15,24 @@
         table, td, th { 
             border: solid 1px #000; 
         } 
+        th {
+            width: 100px;
+            text-align: center;
+        }
         td {
-            padding: 5px;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            overflow: hidden;
         }
         tr:hover {
             background-color: #f5efe3;
+        }
+        td:hover .edit {
+            visibility: visible;
+        }
+        .data:hover {
+            background-color: #ebbb91;
         }
         .chart {
             margin: 10px;
@@ -27,6 +40,50 @@
             height: 300px;
             display: inline-block;
             border: solid 1px #e6e7e5;
+        }
+        .edit {
+            margin-left: 10px;
+            visibility: hidden;
+            display: inline-block;
+        }
+        .edit:hover {
+            cursor: pointer;
+        }
+        .editNum {
+            display: block;
+            float: left;
+            width: 51px;
+            height: 36px;
+            text-align: center;
+            border: solid 1px #f08181;
+            background-color: #f5efe3;
+            border-radius: 5px;
+        }
+        .editNum:hover {
+            border: solid 1px #f08181;
+        }
+        .editNum:focus {
+            border: solid 1px #f08181;
+        }
+        .cancBtn, .confBtn {
+            float: left;
+            padding: 0;
+            width: 20px;
+            height: 40px;
+            font-size: 11px;
+            border: solid 1px #f08181;
+            background-color: #f5efe3;
+            border-radius: 5px;
+            color: #414141;
+        }
+        .cancBtn:hover, .confBtn:hover {
+            cursor: pointer;
+            border: solid 1px #fff;
+            background-color: #f08181;
+            color: #fff;
+        }
+        .selected {
+            background-color: #ebbb91;
         }
     </style>
 </head>
