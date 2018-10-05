@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ife js chart</title>
+    <style>
+        #table-wrapper {
+            height: 420px;
+        }
+        table {
+            margin-top: 10px;
+            border-collapse: collapse; 
+        }
+        table, td, th { 
+            border: solid 1px #000; 
+        } 
+        th {
+            width: 100px;
+            text-align: center;
+        }
+        td {
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            overflow: hidden;
+        }
+        tr:hover {
+            background-color: #f5efe3;
+        }
+        td:hover .edit {
+            visibility: visible;
+        }
+        .data:hover {
+            background-color: #ebbb91;
+        }
+        .chart {
+            margin: 10px;
+            width: 500px;
+            height: 300px;
+            display: inline-block;
+            border: solid 1px #e6e7e5;
+        }
+        .edit {
+            margin-left: 10px;
+            visibility: hidden;
+            display: inline-block;
+        }
+        .edit:hover {
+            cursor: pointer;
+        }
+        .editNum {
+            display: block;
+            float: left;
+            width: 51px;
+            height: 36px;
+            text-align: center;
+            border: solid 1px #f08181;
+            background-color: #f5efe3;
+            border-radius: 5px;
+        }
+        .editNum:hover {
+            border: solid 1px #f08181;
+        }
+        .editNum:focus {
+            border: solid 1px #f08181;
+        }
+        .cancBtn, .confBtn {
+            float: left;
+            padding: 0;
+            width: 20px;
+            height: 40px;
+            font-size: 11px;
+            border: solid 1px #f08181;
+            background-color: #f5efe3;
+            border-radius: 5px;
+            color: #414141;
+        }
+        .cancBtn:hover, .confBtn:hover {
+            cursor: pointer;
+            border: solid 1px #fff;
+            background-color: #f08181;
+            color: #fff;
+        }
+        .selected {
+            background-color: #ebbb91;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="region-radio-wrapper">地区：</div>
+    <div id="product-radio-wrapper">产品：</div>
+   
+    <div id="table-wrapper">
+    </div>
+    
+    <div id="bar-chart" class="chart"></div>
+    <div id="line-chart" class="chart"></div>
+    
+    <script src="./js/checkBox.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/bar.js"></script>
+    <script src="./js/line.js"></script>
+    <script src="./js/sourceData.js"></script>
+    <script src="./js/selectSome.js"></script>
+    <script src="./js/addEL.js"></script>
+</body>
+</html>
