@@ -1,3 +1,4 @@
+// 根据选中的数据生成表格
 (function () {
     // 获得所有选中的复选框
     var checkboxes = document.querySelectorAll("input[name=regions], input[name=products]");
@@ -64,7 +65,7 @@
                     "<th>9月</th>" +
                     "<th>10月</th>" +
                     "<th>11月</th>" +
-                    "<th>11月</th>" +
+                    "<th>12月</th>" +
                 "</thead>";
         table.innerHTML = thd;
         
@@ -97,7 +98,9 @@
                         tdd = tdd + "<td>" + rlist[j].region + "</td>";
 
                         for(var k = 0; k < rlist[j].sale.length; k ++) {
-                            tdd = tdd + "<td>" + rlist[j].sale[k] + "</td>";
+                            tdd = tdd + "<td class='data'>" + rlist[j].sale[k] + 
+                                "<img class='edit' src='./img/edit.ico'/>" +
+                                "</td>";
                         }
 
                         tr.innerHTML = tdd;
@@ -128,7 +131,9 @@
                         tdd = tdd + "<td>" + plist[j].product + "</td>";
 
                         for(var k = 0; k < plist[j].sale.length; k ++) {
-                            tdd = tdd + "<td>" + plist[j].sale[k] + "</td>";
+                            tdd = tdd + "<td class='data'>" + plist[j].sale[k] + 
+                                "<img class='edit' src='./img/edit.ico'/>" +
+                                "</td>";
                         }
 
                         tr.innerHTML = tdd;
