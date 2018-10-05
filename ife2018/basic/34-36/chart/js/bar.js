@@ -5,6 +5,11 @@ function renderBarChart(data) {
     container.innerHTML = "";
     var cheight = container.clientHeight;
     var cwidth = container.clientWidth;
+    
+    // 创建svg画布
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute("width", cwidth);
+    svg.setAttribute("height", cheight);
 
     // 定义横纵轴的宽高
     var yheight = cheight * 0.8;
@@ -24,11 +29,6 @@ function renderBarChart(data) {
     // 根据最大值计算纵轴最大值和y轴间距，Math.ceil 向上取整
     var maxYScale = Math.ceil(maxData / 50) * 50;
     var yspace = maxYScale / 5;
-
-    // 创建svg画布
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute("width", cwidth);
-    svg.setAttribute("height", cheight);
     
     // 获取数据最大值
     function getMax() {
