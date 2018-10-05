@@ -116,7 +116,7 @@ function setLines(data, color) {
     var unit = (yAxisHeight - 10) / maxYScale;
     var xstart = xOffWidth + xspace / 2
     var ystart = yOffHeight;
-    console.log(xstart);
+//    console.log(xstart);
 
     // 绘制折线
     ctx.beginPath();
@@ -166,7 +166,6 @@ function renderLineCharts(data) {
     yspace = (yAxisHeight - 10) / 5;
     
     setAxises();
-    console.log(data);
     
     for(var i = 0; i < data.length; i ++) {
         setLines(data[i], 'rgb(' + Math.floor(Math.random()*(256)) + ',' + +Math.floor(Math.random()*(256))+','+ Math.floor(Math.random()*(256)))+')';
@@ -187,3 +186,4 @@ function getMax2(data) {
     
     return max;
 }
+    
