@@ -28,53 +28,100 @@ Staff.prototype.work = function(){
     console.log("staff.work()");
 }
 // 判断两个职员是否相等
-Staff.prototype.equals = function(o) {
-//    console.log(Object.prototype.toString.call(this));
-//    console.log(Object.prototype.toString.call(o));
-    
-    console.log(this.constructor);
-    console.log(o.constructor);
-    
+Staff.prototype.equals = function(o) {   
     if(this.constructor === o.constructor && this.name === o.name) {
         return true;
     } else return false;
 }
 
 // 服务员类 组合方式继承职员类
-function Waiter(name, salary) {
+var Waiter = function(name, salary) {
     Staff.call(this, name, salary);
 }
 Waiter.prototype = new Staff();
 Waiter.prototype.constructor = Waiter;
 
-Waiter.prototype.work = function() {
-    var arg = arguments;
+// 服务员为顾客点餐，通知厨师成功返回菜名
+Waiter.prototype.service = function() {
     // 判断参数是否为数组
     if(arguments[0] instanceof Array) {
-        console.log("记录");
+        console.log("记录菜品");
+        for(var e in arguments[0]) {
+            console.log("通知厨师做" + e);
+        }
+        
+        return name;
     } else {
-        console.log("上菜");
+        console.log("通知厨师做" + arguments[0]);
+        return name;
     }
+    
+    return "";
 }
 
+// 服务员上菜，成功后返回true
+Waiter.prototype.serving = function(name) {
+    console.log("服务员上菜" + name);
+    return true;
+}
+
+// 利用闭包的特性创建单例,同时符合惰性单例的特性
+Waiter.getInstance = (function(name, salary) {
+    var instance;
+    return function(name, salary) {
+        if(!instance) {
+            instance = new Waiter(name, salary);
+            console.log("A waiter has been created.")
+        }
+        return instance;
+    }
+})();
+
 // 厨师类 组合方式继承职员类
-function Cook(name, salary) {
+var Cook = function(name, salary) {
     Staff.call(this, name, salary);
 }
 Cook.prototype = new Staff();
 Cook.prototype.constructor = Cook;
 
-Cook.prototype.work = function() {
-    console.log("烹饪");
+Cook.prototype.callWaiter = function(name) {
+    console.log("通知服务员" + name + "做好了");
+    return name;
+}
+Cook.prototype.cook = function(name) {
+    console.log("厨师烹饪" + name + "菜");
+    this.callWaiter(name);
+    return true;
 }
 
+// 利用闭包的特性创建单例,同时符合惰性单例的特性
+Cook.getInstance = (function(name, salary) {
+    var instance;
+    return function(name, salary) {
+        if(!instance) {
+            instance = new Cook(name, salary);
+        }
+        return instance;
+    }
+})();
+
 // 顾客类
-function Customer() {}
-Customer.prototype.order = function() {
-    console.log("点菜");
+function Customer(id) {
+    this.id = id;
+}
+// 顾客根据菜单随机点餐，返回所点菜品名
+Customer.prototype.order = function(dishes) {
+    var len = dishes.length;
+    
+    var orderone = parseInt(Math.random()*len, 10);
+    var name = dishes[orderone].name;
+    
+    console.log("顾客" + this.id + "来了，点" + name);
+    
+    return name;
 }
 Customer.prototype.eat = function() {
-    console.log("吃");
+    console.log("顾客" + this.id + "吃");
 }
 
 // 菜品类
