@@ -18,17 +18,27 @@ for(var i = 0; i < customers.length; i ++) {
     // 顾客点餐
     name = customers[i].order(dishes);
     
-    var cook = Cook.getInstance("Tony", 10000)
+    var cook = Cook.getInstance("Tony", 10000);
+    var waiter = Waiter.getInstance("Tom", 8000);
     
-    // 服务员通知厨师做菜
-    if(Cook.getInstance("Tony", 10000)
-       .cook(Waiter.getInstance("Tom", 8000)
-             .service(name))) {
-        if(Waiter.getInstance("Tom", 8000)
-           .serving(name)){
-            customers[i].eat();
-        }
-    }
+//    // 服务员通知厨师做菜
+//    if(Cook.getInstance("Tony", 10000)
+//       .cook(Waiter.getInstance("Tom", 8000)
+//             .service(name))) {
+//        if(Waiter.getInstance("Tom", 8000)
+//           .serving(name)){
+//            customers[i].eat();
+//        }
+//    }
+    
+    waiter.service(name, function() {
+        cook.cook(name, function() {
+            waiter.serving(name, function() {
+                customers[i].eat();
+            })
+        })
+    })
+    
     
     console.log("顾客" + i + "走了");
 }

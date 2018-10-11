@@ -41,28 +41,25 @@ var Waiter = function(name, salary) {
 Waiter.prototype = new Staff();
 Waiter.prototype.constructor = Waiter;
 
-// 服务员为顾客点餐，通知厨师成功返回菜名
-Waiter.prototype.service = function() {
+// 服务员为顾客点餐，通知厨师成功
+Waiter.prototype.service = function(dish, fn) {
     // 判断参数是否为数组
-    if(arguments[0] instanceof Array) {
+    if(dish instanceof Array) {
         console.log("记录菜品");
-        for(var e in arguments[0]) {
+        for(var e in dish) {
             console.log("通知厨师做" + e);
         }
-        
-        return name;
     } else {
-        console.log("通知厨师做" + arguments[0]);
-        return name;
+        console.log("通知厨师做" + dish);
     }
     
-    return "";
+    fn();
 }
 
-// 服务员上菜，成功后返回true
-Waiter.prototype.serving = function(name) {
+// 服务员上菜
+Waiter.prototype.serving = function(name, fn) {
     console.log("服务员上菜" + name);
-    return true;
+    fn();
 }
 
 // 利用闭包的特性创建单例,同时符合惰性单例的特性
@@ -86,12 +83,11 @@ Cook.prototype.constructor = Cook;
 
 Cook.prototype.callWaiter = function(name) {
     console.log("通知服务员" + name + "做好了");
-    return name;
 }
-Cook.prototype.cook = function(name) {
+Cook.prototype.cook = function(name, fn) {
     console.log("厨师烹饪" + name + "菜");
     this.callWaiter(name);
-    return true;
+    fn();
 }
 
 // 利用闭包的特性创建单例,同时符合惰性单例的特性
@@ -100,6 +96,7 @@ Cook.getInstance = (function(name, salary) {
     return function(name, salary) {
         if(!instance) {
             instance = new Cook(name, salary);
+            console.log("A cook has been created.")
         }
         return instance;
     }
@@ -109,7 +106,7 @@ Cook.getInstance = (function(name, salary) {
 function Customer(id) {
     this.id = id;
 }
-// 顾客根据菜单随机点餐，返回所点菜品名
+// 顾客根据菜单随机点餐, 返回所点菜名
 Customer.prototype.order = function(dishes) {
     var len = dishes.length;
     
